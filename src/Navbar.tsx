@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import logo from './assets/riotlogo.png';
 
 function Navbar() {
@@ -32,9 +32,9 @@ function Navbar() {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    function handleSearch() {
+    const handleSearch = () => {
         console.log('Searching for:', searchTerm);
-    }
+    };
 
     return (
         <header className={`font-montserrat sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-scrollnav shadow-lg' : 'bg-transparent'}`}>
@@ -50,7 +50,7 @@ function Navbar() {
                                 type='button' 
                                 className='flex items-center gap-x-1 text-[13px] font-[600] leading-[15.6px] tracking-wide text-navgrays hover:bg-navgrey hover:bg-opacity-30 py-2 px-4 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out' 
                                 aria-expanded={openDropdown === 'whoWeAre'} 
-                                onClick={() => toggleDropdown({ dropdown: 'whoWeAre' })}
+                                onClick={() => toggleDropdown('whoWeAre')}
                             >
                                 WHO WE ARE
                                 <svg className="h-4 w-4 flex-none text-navgrays hover:text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -93,7 +93,7 @@ function Navbar() {
                                 type='button' 
                                 className='flex items-center gap-x-1 text-[13px] font-[600] leading-[15.6px] tracking-wide text-navgrays hover:bg-navgrey hover:bg-opacity-30 py-2 px-4 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out' 
                                 aria-expanded={openDropdown === 'workWithUs'} 
-                                onClick={() => toggleDropdown({ dropdown: 'workWithUs' })}
+                                onClick={() => toggleDropdown('workWithUs')}
                             >
                                 WORK WITH US
                                 <svg className="h-4 w-4 flex-none text-navgrays hover:text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
