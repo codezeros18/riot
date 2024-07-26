@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 import logo from './assets/riotlogo.png';
 
 function Navbar() {
@@ -20,13 +20,13 @@ function Navbar() {
         };
     }, []);
 
-    const [openDropdown, setOpenDropdown] = useState(null);
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
-    function toggleDropdown(dropdown) {
+    const toggleDropdown = (dropdown: string) => {
         setOpenDropdown(openDropdown === dropdown ? null : dropdown);
-    }
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -50,7 +50,7 @@ function Navbar() {
                                 type='button' 
                                 className='flex items-center gap-x-1 text-[13px] font-[600] leading-[15.6px] tracking-wide text-navgrays hover:bg-navgrey hover:bg-opacity-30 py-2 px-4 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out' 
                                 aria-expanded={openDropdown === 'whoWeAre'} 
-                                onClick={() => toggleDropdown('whoWeAre')}
+                                onClick={() => toggleDropdown({ dropdown: 'whoWeAre' })}
                             >
                                 WHO WE ARE
                                 <svg className="h-4 w-4 flex-none text-navgrays hover:text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -93,7 +93,7 @@ function Navbar() {
                                 type='button' 
                                 className='flex items-center gap-x-1 text-[13px] font-[600] leading-[15.6px] tracking-wide text-navgrays hover:bg-navgrey hover:bg-opacity-30 py-2 px-4 rounded-[8px] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out' 
                                 aria-expanded={openDropdown === 'workWithUs'} 
-                                onClick={() => toggleDropdown('workWithUs')}
+                                onClick={() => toggleDropdown({ dropdown: 'workWithUs' })}
                             >
                                 WORK WITH US
                                 <svg className="h-4 w-4 flex-none text-navgrays hover:text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
