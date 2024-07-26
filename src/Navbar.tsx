@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import logo from './assets/riotlogo.png';
 
 function Navbar() {
@@ -6,24 +7,26 @@ function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
+        if (window.scrollY > 50) {
+            setScrolled(true);
+            
+        } else {
+            setScrolled(false);
+        }
         };
 
         window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
+    // State to track which dropdown is open. `null` means no dropdown is open.
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
+    // Handle opening a specific dropdown
     const toggleDropdown = (dropdown: string) => {
         setOpenDropdown(openDropdown === dropdown ? null : dropdown);
     };
@@ -31,8 +34,8 @@ function Navbar() {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-
     const handleSearch = () => {
+        // Implement search functionality here
         console.log('Searching for:', searchTerm);
     };
 
@@ -42,7 +45,7 @@ function Navbar() {
                 <div className='flex items-center'>
                     <a href="" className='-m-1.5 p-1.5'>
                         <span className='sr-only'>Company</span>
-                        <img src={logo} className='h-8' alt="Company Logo" />
+                        <img src={logo} className='h-8' alt="" />
                     </a>
                     <div className='hidden lg:flex lg:gap-x-4 lg:justify-start lg:ml-14'>
                         <div className='relative'>
@@ -145,49 +148,89 @@ function Navbar() {
                 <div className='flex lg:hidden'>
                     <button 
                         type='button' 
-                        className='inline-flex items-center justify-center rounded-md p-2 text-navgrays hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white' 
-                        onClick={toggleMobileMenu}
+                        className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700' 
+                        onClick={toggleMobileMenu} 
+                        aria-expanded={isMobileMenuOpen}
                     >
-                        <span className='sr-only'>Open main menu</span>
-                        {!isMobileMenuOpen ? (
-                            <svg className='block h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'>
-                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16m-7 6h7' />
-                            </svg>
-                        ) : (
-                            <svg className='block h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' aria-hidden='true'>
-                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' />
-                            </svg>
-                        )}
+                        <span className='sr-only'>Open Main Menu</span>
+                        <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
                     </button>
                 </div>
-                <div className='hidden lg:flex lg:gap-x-4 lg:justify-end lg:ml-14'>
+                <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
                     <div className='relative'>
-                        <input
-                            type='text'
-                            className='w-full py-2 px-4 rounded-[8px] bg-gray-100 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                            placeholder='Search...'
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                        <input 
+                            type='text' 
+                            value={searchTerm} 
+                            onChange={(e) => setSearchTerm(e.target.value)} 
+                            placeholder='SEARCH' 
+                            className='border border-white bg-transparent rounded-[50px] text-[12px] py-2 px-4 pr-14 mr-2 font-[700] text-white placeholder-gray-100'
                         />
-                        <button
-                            type='button'
-                            className='absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500'
-                            onClick={handleSearch}
+                        <button 
+                            type='button' 
+                            onClick={handleSearch} 
+                            className='absolute inset-y-0 right-2 flex items-center justify-center w-10  rounded-full pr-4'
                         >
-                            <svg
-                                className='h-4 w-4'
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                                stroke='currentColor'
-                                aria-hidden='true'
-                            >
-                                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M21 21l-4.35-4.35m-3.3 0A7.5 7.5 0 1117.5 10.5 7.5 7.5 0 0113.35 16.65z' />
+                            <svg className="h-10 w-10 text-white " fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 5a6 6 0 106 6 6 6 0 00-6-6z" />
                             </svg>
                         </button>
                     </div>
+                    <a href="" className='text-[13px] font-[600] leading-[15.6px] tracking-wide bg-signred border-2 border-signred text-navgrays rounded-[50px] py-2 px-6 hover:bg-transparent hover:text-navgrays hover:border-signred focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out '>SIGN IN</a>
                 </div>
             </nav>
+            {isMobileMenuOpen && (
+                <div className='lg:hidden' role='dialog' aria-modal='true'>
+                    <div className='fixed inset-0 z-10'></div>
+                    <div className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-herobackg px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10'>
+                        <div className='flex items-center justify-between'>
+                            <a href="" className='-m-1.5 p-1.5'>
+                                <span className='sr-only'>Your Company</span>
+                                <img src={logo} className='h-8 w-auto' alt="" />
+                            </a>
+                            <button type='button' className='-m-2.5 rounded-md p-2.5 text-gray-700' onClick={toggleMobileMenu}>
+                                <span className='sr-only'>Close Menu</span>
+                                <svg className="h-6 w-6 text-greenbar" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className='mt-10 flow-root'>
+                            <div className='-my-6 divide-y divide-gray-500/10'>
+                                <div className='space-y-2 py-6'>
+                                    <a href="#" className="-mx-3 block rounded-lg py-2 px-3 font-[600] leading-[24px] text-[16px] text-gray-300 hover:bg-gray-400/10">WHO WE ARE</a>
+                                    <a href="#" className="-mx-3 block rounded-lg py-2 px-3 font-[600] leading-[24px] text-[16px] text-gray-300 hover:bg-gray-400/10">WORK WITH US</a>
+                                    <a href="#" className="-mx-3 block rounded-lg py-2 px-3 font-[600] leading-[24px] text-[16px] text-gray-300 hover:bg-gray-400/10">NEWS</a>
+                                </div>
+                                <div className='py-6  text-center'>
+                                    <div className='relative'>
+                                        <input 
+                                            type='text' 
+                                            value={searchTerm} 
+                                            onChange={(e) => setSearchTerm(e.target.value)} 
+                                            placeholder='SEARCH' 
+                                            className=' bg-dropdownbackg rounded-[50px] text-[12px] py-2 px-4 pr-14 mr-2 font-[700] text-white placeholder-gray-100'
+                                        />
+                                        <button 
+                                            type='button' 
+                                            onClick={handleSearch} 
+                                            className='absolute inset-y-0 right-2 flex items-center justify-center w-10  rounded-full pr-4'
+                                        >
+                                            <svg className="h-10 w-10 text-white " fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 5a6 6 0 106 6 6 6 0 00-6-6z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div className='mt-10'>
+                                         <a href="" className='block w-full text-[13px] font-[700] leading-[15.6px] tracking-wide bg-signred border-2 border-signred text-scrollnav rounded-[50px] py-2 px-6 hover:bg-transparent hover:text-navgrays hover:border-signred focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-300 ease-in-out '>SIGN IN</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </header>
     );
 }
