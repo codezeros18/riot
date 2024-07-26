@@ -1,6 +1,6 @@
-import React from 'react';
-import eldenring from './assets/eldenring.jpg';
-import lol1 from './assets/lol.jpeg';
+// import React from 'react';
+// import eldenring from './assets/eldenring.jpg';
+// import lol1 from './assets/lol.jpeg';
 import lol3 from './assets/lol3.png';
 import lol4 from './assets/lol4.jpg';
 import viego from './assets/viego.jpg';

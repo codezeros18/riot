@@ -9,7 +9,7 @@ import wildrift from './assets/wildrift.jpg';
 import valo from './assets/valo2.jpg';
 import lor from './assets/lor.jpg';
 import teamfight from './assets/teamfight.jpg';
-import BackgroundWrap from './BackgroundWrap'
+// import BackgroundWrap from './BackgroundWrap'
 
 const App: React.FC = () => {
     const images = [lol, valo, teamfight, wildrift, lor];
